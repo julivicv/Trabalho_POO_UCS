@@ -1,3 +1,5 @@
+package main;
+
 public class Adress {
     protected String street;
     protected String number;

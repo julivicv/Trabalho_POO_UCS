@@ -1,12 +1,17 @@
+package main;
+
+
 public class Product {
     private String name;
     private String description;
     private String imgURL;
+    private Supplier supplier;
 
-    public Product(String name, String description, String imgURL) {
+    public Product(String name, String description, String imgURL, Supplier supplier) {
         this.name = name;
         this.description = description;
         this.imgURL = imgURL;
+        this.supplier = supplier;
     }
 
     public String getName() {
@@ -31,5 +36,12 @@ public class Product {
 
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+    
+    @Override
+    public String toString() {
+        return "Produto: " + name + "\n" +
+               "Descrição: " + description + "\n" +
+               "Imagem: " + imgURL + "\n";
     }
 }

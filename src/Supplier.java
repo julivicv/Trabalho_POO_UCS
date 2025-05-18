@@ -1,3 +1,4 @@
+package main;
 import java.util.Scanner;
 
 public class Supplier extends User {
@@ -16,7 +17,7 @@ public class Supplier extends User {
         System.out.println("=== Registro de fornecedor ===");
 
         System.out.print("Digite o nome do fornecedor: ");
-        this.email = sc.nextLine();
+        this.name = sc.nextLine();
 
         System.out.print("Digite o email do fornecedor: ");
         this.email = sc.nextLine();
@@ -60,6 +61,10 @@ public class Supplier extends User {
         this.phone = phone;
     }
     
+    public String getName() {
+    	return this.name;
+    }
+    
     public void addProduct(Scanner sc) {
         if (currentProductIndex >= products.length) {
             System.out.println("Limite máximo de produtos atingido!");
@@ -78,10 +83,48 @@ public class Supplier extends User {
         String imgURL = sc.nextLine();
         sc.nextLine();
 
-        products[currentProductIndex] = new Product(name, description, imgURL);
+        products[currentProductIndex] = new Product(name, description, imgURL, this);
         currentProductIndex++;
 
         System.out.println("Produto cadastrado com sucesso!");
+    }
+    
+    public void removeProduct(Scanner sc) {
+    	if (currentProductIndex == 0) {
+            System.out.println("Não exite produto para ser removido");
+            return;
+        }
+        System.out.print("Digite o índice do produto a remover: ");
+        int idxDel = sc.nextInt();
+        
+        for (int i = idxDel; i < this.currentProductIndex - 1; i++) {
+        	this.products[i] = this.products[i + 1];
+        }
+        this.products[--this.currentProductIndex] = null;
+        System.out.println("Produto removido.");
+    }
+    
+    public void listAllProduct() {
+    	  System.out.println("Produtos cadastrados:");
+    	    for (int i = 0; i < currentProductIndex; i++) {
+    	        System.out.println(i + " - " + products[i].toString());
+    	    }
+    }
+    
+    public Product getProductByIndex(int index) {
+        if (index >= 0 && index < currentProductIndex) {
+            return products[index];
+        }
+        return null;
+    }
+    
+    public Product findProductByName(String name) {
+        for (int i = 0; i < currentProductIndex; i++) {
+            if (products[i].getName().equalsIgnoreCase(name)) {
+                return products[i];
+            }
+        }
+        return null;
     }
 
     @Override

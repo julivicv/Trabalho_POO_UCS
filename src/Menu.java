@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -48,66 +50,186 @@ public class Menu {
             opc = sc.nextInt();
 
             switch (opc) {
-                case 1:
-                    int opcFornecedor;
-                    do {
-                        System.out.println("\nDigite o número da operação desejada para fornecedores:");
-                        System.out.println(" 1 - Cadastrar fornecedor");
-                        System.out.println(" 2 - Remover fornecedor");
-                        System.out.println(" 3 - Listar fornecedores");
-                        System.out.println(" 0 - Voltar");
+            case 1:
+                int opcFornecedor;
+                do {
+                    System.out.println("\nDigite o número da operação desejada para fornecedores:");
+                    System.out.println(" 1 - Cadastrar fornecedor");
+                    System.out.println(" 2 - Alterar fornecedor");
+                    System.out.println(" 3 - Remover fornecedor");
+                    System.out.println(" 4 - Listar fornecedores");
+                    System.out.println(" 5 - Consultar fornecedor por código");
+                    System.out.println(" 6 - Consultar fornecedor por nome");
+                    System.out.println(" 0 - Voltar");
 
-                        opcFornecedor = sc.nextInt();
-                        sc.nextLine();
+                    opcFornecedor = sc.nextInt();
+                    sc.nextLine();
 
-                        switch (opcFornecedor) {
-                            case 1:
-                                if (supplierCount < suppliers.length) {
-                                    Supplier newSupplier = new Supplier(sc);
-                                    suppliers[supplierCount++] = newSupplier;
-                                    System.out.println("Fornecedor cadastrado com sucesso!");
-                                } else {
-                                    System.out.println("Limite de fornecedores atingido.");
+                    switch (opcFornecedor) {
+                        case 1:
+                            if (supplierCount < suppliers.length) {
+                                Supplier newSupplier = new Supplier(sc);
+                                suppliers[supplierCount++] = newSupplier;
+                                System.out.println("Fornecedor cadastrado com sucesso!");
+                            } else {
+                                System.out.println("Limite de fornecedores atingido.");
+                            }
+                            break;
+                        case 2:
+                            System.out.println("Digite o índice do fornecedor a alterar:");
+                            for (int i = 0; i < supplierCount; i++) {
+                                System.out.println(i + " - " + suppliers[i].toString());
+                            }
+                            int idxAlt = sc.nextInt();
+                            sc.nextLine();
+                            if (idxAlt >= 0 && idxAlt < supplierCount) {
+                                System.out.println("Alterando dados do fornecedor:");
+                                suppliers[idxAlt] = new Supplier(sc);
+                                System.out.println("Fornecedor alterado com sucesso.");
+                            } else {
+                                System.out.println("Índice inválido.");
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Digite o índice do fornecedor a remover:");
+                            for (int i = 0; i < supplierCount; i++) {
+                                System.out.println(i + " - " + suppliers[i].toString());
+                            }
+                            int idx = sc.nextInt();
+                            if (idx >= 0 && idx < supplierCount) {
+                                for (int i = idx; i < supplierCount - 1; i++) {
+                                    suppliers[i] = suppliers[i + 1];
                                 }
-                                break;
-                            case 2:
-                                System.out.println("Digite o índice do fornecedor a remover:");
-                                for (int i = 0; i < supplierCount; i++) {
-                                    System.out.println(i + " - " + suppliers[i].toString());
+                                suppliers[--supplierCount] = null;
+                                System.out.println("Fornecedor removido.");
+                            } else {
+                                System.out.println("Índice inválido.");
+                            }
+                            break;
+                        case 4:
+                            System.out.println("Lista de Fornecedores:");
+                            for (int i = 0; i < supplierCount; i++) {
+                                System.out.println(i + " - " + suppliers[i].toString());
+                            }
+                            break;
+                        case 5:
+                            System.out.print("Digite o código do fornecedor: ");
+                            int codigoBusca = sc.nextInt();
+                            sc.nextLine();
+                            boolean encontrado = false;
+                            for (int i = 0; i < supplierCount; i++) {
+                                if (i + 1 == codigoBusca) {
+                                    System.out.println("Fornecedor encontrado: " + suppliers[i].toString());
+                                    encontrado = true;
+                                    break;
                                 }
-                                int idx = sc.nextInt();
-                                if (idx >= 0 && idx < supplierCount) {
-                                    for (int i = idx; i < supplierCount - 1; i++) {
-                                        suppliers[i] = suppliers[i + 1];
-                                    }
-                                    suppliers[--supplierCount] = null;
-                                    System.out.println("Fornecedor removido.");
-                                } else {
-                                    System.out.println("Índice inválido.");
+                            }
+                            if (!encontrado) {
+                                System.out.println("Fornecedor com esse código não encontrado.");
+                            }
+                            break;
+                        case 6:
+                            System.out.print("Digite o nome (ou parte dele) do fornecedor: ");
+                            String nomeBusca = sc.nextLine().toLowerCase();
+                            boolean achou = false;
+                            for (int i = 0; i < supplierCount; i++) {
+                                if (suppliers[i].getName().toLowerCase().contains(nomeBusca)) {
+                                    System.out.println("Fornecedor encontrado: " + suppliers[i].toString());
+                                    achou = true;
                                 }
-                                break;
-                            case 3:
-                                System.out.println("Lista de Fornecedores:");
-                                for (int i = 0; i < supplierCount; i++) {
-                                    System.out.println(i + " - " + suppliers[i].toString());
-                                }
-                                break;
-                            case 0:
-                                System.out.println("Voltando ao menu principal...");
-                                break;
-                            default:
-                                System.out.println("Opção inválida.");
-                        }
-                    } while (opcFornecedor != 0);
-                    break;
+                            }
+                            if (!achou) {
+                                System.out.println("Nenhum fornecedor com esse nome encontrado.");
+                            }
+                            break;
+                        case 0:
+                            System.out.println("Voltando ao menu principal...");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                    }
+                } while (opcFornecedor != 0);
+                break;
                 case 2:
-                    // Lógica para gerenciar produtos de fornecedor
+                    System.out.println("Selecione o fornecedor:");
+                    for (int i = 0; i < supplierCount; i++) {
+                        System.out.println(i + " - " + suppliers[i].getName());
+                    }
+                    int idxSupplier = sc.nextInt();
+                    sc.nextLine();
+
+                    if (idxSupplier >= 0 && idxSupplier < supplierCount) {
+                        Supplier selectedSupplier = suppliers[idxSupplier];
+                        int opcProduto;
+                        do {
+                            System.out.println("\nGerenciamento de produtos do fornecedor " + selectedSupplier.getName());
+                            System.out.println(" 1 - Adicionar produto");
+                            System.out.println(" 2 - Listar produtos");
+                            System.out.println(" 3 - Alterar produto");
+                            System.out.println(" 4 - Excluir produto");
+                            System.out.println(" 5 - Consultar produto por nome");
+                            System.out.println(" 0 - Voltar");
+                            opcProduto = sc.nextInt();
+                            sc.nextLine();
+
+                            switch (opcProduto) {
+                                case 1:
+                                    selectedSupplier.addProduct(sc);
+                                    break;
+                                case 2:
+                                    selectedSupplier.listAllProduct();
+                                    break;
+                                case 3:
+                                    selectedSupplier.listAllProduct();
+                                    System.out.print("Digite o índice do produto a alterar: ");
+                                    int idxAlt = sc.nextInt();
+                                    sc.nextLine();
+                                    Product prodAlt = selectedSupplier.getProductByIndex(idxAlt);
+                                    if (prodAlt != null) {
+                                        System.out.print("Novo nome: ");
+                                        prodAlt.setName(sc.nextLine());
+                                        System.out.print("Nova descrição: ");
+                                        prodAlt.setDescription(sc.nextLine());
+                                        System.out.print("Novo nome de imagem: ");
+                                        String newImg = sc.nextLine();
+                                        prodAlt.setImgURL(newImg);
+                                        System.out.println("Produto alterado com sucesso.");
+                                    } else {
+                                        System.out.println("Produto não encontrado.");
+                                    }
+                                    break;
+                                case 4:
+                                    selectedSupplier.listAllProduct();
+                                    selectedSupplier.removeProduct(sc);
+                                    
+                                    break;
+                                case 5:
+                                    System.out.print("Digite o nome do produto: ");
+                                    String nomeProd = sc.nextLine();
+                                    Product encontrado = selectedSupplier.findProductByName(nomeProd);
+                                    if (encontrado != null) {
+                                        System.out.println("Produto encontrado: " + encontrado.getName() + " - " + encontrado.getDescription());
+                                    } else {
+                                        System.out.println("Produto não encontrado.");
+                                    }
+                                    break;
+                                case 0:
+                                    System.out.println("Voltando ao menu anterior.");
+                                    break;
+                                default:
+                                    System.out.println("Opção inválida.");
+                            }
+                        } while (opcProduto != 0);
+                    } else {
+                        System.out.println("Fornecedor inválido.");
+                    }
                     break;
                 case 3:
                     // Lógica para gerenciar estoque de produtos
                     break;
                 case 0:
                     System.out.println("Saindo do sistema.");
+                    opc = 0;
                     break;
                 default:
                     System.out.println("Opção inválida.");
