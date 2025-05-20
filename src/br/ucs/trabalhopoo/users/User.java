@@ -1,3 +1,5 @@
+package br.ucs.trabalhopoo.users;
+
 import java.util.Scanner;
 
 public class User {

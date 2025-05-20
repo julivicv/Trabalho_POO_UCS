@@ -1,3 +1,6 @@
+import br.ucs.trabalhopoo.users.Supplier;
+import br.ucs.trabalhopoo.menus.Menu;
+
 import java.util.Scanner;
 
 public class Main {

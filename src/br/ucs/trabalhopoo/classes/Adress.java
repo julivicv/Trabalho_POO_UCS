@@ -1,3 +1,5 @@
+package br.ucs.trabalhopoo.classes;
+
 public class Adress {
     protected String street;
     protected String number;

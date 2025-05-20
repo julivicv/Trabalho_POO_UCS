@@ -1,3 +1,5 @@
+package br.ucs.trabalhopoo.classes;
+
 public class Stock {
     private int quantity;
     private double price;

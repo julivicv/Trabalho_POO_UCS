@@ -1,3 +1,5 @@
+package br.ucs.trabalhopoo.classes;
+
 import java.util.Scanner;
 
 public class Product {

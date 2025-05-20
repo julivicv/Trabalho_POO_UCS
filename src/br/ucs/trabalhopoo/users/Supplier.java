@@ -1,3 +1,8 @@
+package br.ucs.trabalhopoo.users;
+
+import br.ucs.trabalhopoo.classes.Adress;
+import br.ucs.trabalhopoo.classes.Product;
+
 import java.util.Scanner;
 
 public class Supplier extends User {

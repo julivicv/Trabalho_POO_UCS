@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package br.ucs.trabalhopoo.users;
 
 public class Admin extends User {
     private static final String ROLE = "admin";
