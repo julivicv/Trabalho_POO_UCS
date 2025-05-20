@@ -2,9 +2,8 @@ public class Product {
     private String name;
     private String description;
     private String imgURL;
-    private Supplier supplier;
 
-    public Product(String name, String description, String imgURL, Supplier supplier) {
+    public Product(String name, String description, String imgURL) {
         this.name = name;
         this.description = description;
         this.imgURL = imgURL;
