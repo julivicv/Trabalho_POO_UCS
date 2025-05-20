@@ -70,6 +70,7 @@ public class Menu {
     protected void menuAdm() {
         MenuAdmin menuAdmin = new MenuAdmin(suppliers, supplierCount, sc);
         menuAdmin.menu();
+        adm.logout();
     }
 
     protected boolean menuManageSuppliers() {

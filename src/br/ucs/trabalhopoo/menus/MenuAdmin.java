@@ -21,7 +21,7 @@ public class MenuAdmin extends Menu {
             System.out.println(" 2 - Gerenciar produtos de fornecedor");
             System.out.println(" 3 - Gerenciar estoque de produtos");
             System.out.println(" 4 - Criar dados de teste");
-            System.out.println(" 0 - Sair");
+            System.out.println(" 0 - Deslogar");
 
             opc = sc.nextInt();
             boolean success = false;
@@ -46,7 +46,6 @@ public class MenuAdmin extends Menu {
                     super.createTestData();
                     break;
                 case 0:
-                    System.out.println("Saindo do sistema.");
                     opc = 0;
                     break;
                 default:
@@ -91,6 +90,7 @@ public class MenuAdmin extends Menu {
                     this.listSuppliersByName();
                     break;
                 case 0:
+                    super.adm.logout();
                     System.out.println("Voltando ao menu principal...");
                     return true;
                 default:
