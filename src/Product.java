@@ -36,6 +36,16 @@ public class Product {
         this.imgURL = imgURL;
     }
 
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void addStock(int quantity, double price) {
+        if (stock == null) {
+            stock = new Stock(quantity, price);
+        }
+    }
+
     public void addStock(Scanner sc) {
         if (stock == null) {
             System.out.println("=== Cadastro de Estoque ===");
@@ -53,7 +63,7 @@ public class Product {
         }
     }
 
-    public void removeStock(Scanner sc) {
+    public void removeStock() {
         this.stock = null;
         System.out.println("Estoque removido do produto.");
     }

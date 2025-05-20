@@ -5,8 +5,16 @@ public class Supplier extends User {
     private String phone;
     private Adress adress;
     private static final String ROLE = "supplier";
-    private final Product[] products = new Product[20];
+    private Product[] products = new Product[20];
     private int currentProductIndex = 0;
+
+    public Supplier(String name, String email, String password, String phone, Adress adress) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.adress = adress;
+    }
 
     public Supplier(Scanner sc) {
         initializeSupplier(sc);
@@ -63,7 +71,21 @@ public class Supplier extends User {
     public String getName() {
     	return this.name;
     }
-    
+
+    public Product[] getProducts() {
+        return products;
+    }
+
+    public int getCurrentProductIndex() {
+        return currentProductIndex;
+    }
+
+    public void addProduct(Product product) {
+        if (currentProductIndex < products.length) {
+            products[currentProductIndex++] = product;
+        }
+    }
+
     public void addProduct(Scanner sc) {
         if (currentProductIndex >= products.length) {
             System.out.println("Limite máximo de produtos atingido!");

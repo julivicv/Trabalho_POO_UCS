@@ -60,7 +60,9 @@ public class Menu {
                     }
                     break;
                 case 3:
-                    // Lógica para gerenciar estoque de produtos
+                    while (!success) {
+                        success = this.menuManageStock();
+                    }
                     break;
                 case 0:
                     System.out.println("Saindo do sistema.");
@@ -135,8 +137,8 @@ public class Menu {
                     } else {
                         for (int i = 0; i < supplierCount; i++) {
                             System.out.println("============================\n" +
-                                                i + " - " + suppliers[i].toString() +
-                                                "\n============================");
+                                    i + " - " + suppliers[i].toString() +
+                                    "\n============================");
                         }
                     }
                     break;
@@ -251,6 +253,89 @@ public class Menu {
                         System.out.println("Opção inválida.");
                 }
             } while (opcProduto != 0);
+        } else {
+            System.out.println("Fornecedor inválido.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean menuManageStock() {
+        System.out.println("Selecione o fornecedor:");
+        for (int i = 0; i < supplierCount; i++) {
+            System.out.println(i + " - " + suppliers[i].getName());
+        }
+        int idxSupplier = sc.nextInt();
+        sc.nextLine();
+
+        if (idxSupplier >= 0 && idxSupplier < supplierCount) {
+            Supplier selectedSupplier = suppliers[idxSupplier];
+            Product[] products = selectedSupplier.getProducts();
+            int productCurrIdx = selectedSupplier.getCurrentProductIndex();
+
+            System.out.println("Selecione o produto:");
+            for (int i = 0; i < productCurrIdx; i++) {
+                System.out.println(i + " - " + products[i].getName());
+            }
+            int idxProduct = sc.nextInt();
+            sc.nextLine();
+
+            if (idxProduct >= 0 && idxProduct < productCurrIdx) {
+                Product selectedProduct = products[idxProduct];
+                Stock stock = selectedProduct.getStock();
+                int opcProduto;
+                do {
+                    System.out.println("\nGerenciamento de estoque do fornecedor " + selectedSupplier.getName());
+                    System.out.println(" 1 - Adicionar estoque");
+                    System.out.println(" 2 - Excluir estoque");
+                    System.out.println(" 3 - Alterar quantidade");
+                    System.out.println(" 4 - Alterar preço");
+                    System.out.println(" 5 - Consultar estoque do produto");
+                    System.out.println(" 0 - Voltar");
+                    opcProduto = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (opcProduto) {
+                        case 1:
+                            selectedProduct.addStock(sc);
+                            break;
+                        case 2:
+                            selectedProduct.removeStock();
+                            break;
+                        case 3:
+                            if (stock != null) {
+                                System.out.println("\n" + stock + "\n");
+                                System.out.print("Digite a nova quantidade: ");
+                                int newQtd = sc.nextInt();
+                                sc.nextLine();
+                                stock.setQuantity(newQtd);
+                                System.out.println("Quantidade alterada com sucesso.");
+                            }
+                            break;
+                        case 4:
+                            if (stock != null) {
+                                System.out.println("\n" + stock + "\n");
+                                System.out.print("Digite o novo preço: ");
+                                double newPrice = sc.nextDouble();
+                                sc.nextLine();
+                                stock.setPrice(newPrice);
+                                System.out.println("Preço alterado com sucesso.");
+                            }
+                            break;
+                        case 5:
+                            System.out.println("\n" + stock + "\n");
+                            break;
+                        case 0:
+                            System.out.println("Voltando ao menu anterior.");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                    }
+                } while (opcProduto != 0);
+            } else {
+                System.out.println("Produto inválido.");
+                return false;
+            }
         } else {
             System.out.println("Fornecedor inválido.");
             return false;
