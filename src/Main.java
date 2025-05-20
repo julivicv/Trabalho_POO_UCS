@@ -5,10 +5,12 @@ public class Main {
 
         Supplier[] suppliers = new Supplier[20];
         int supplierCount = 0;
+        Scanner sc = new Scanner(System.in);
 
-        Menu menu = new Menu(suppliers, supplierCount);
+        Menu menu = new Menu(suppliers, supplierCount, sc);
 
         menu.menu();
+        sc.close();
     }
 }
 

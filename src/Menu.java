@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
 public class Menu {
-    private static Scanner sc = new Scanner(System.in);
-    private static Admin adm = new Admin("a", "a");
+    private static final Admin adm = new Admin("a", "a");
+    private final Scanner sc;
     private User user;
     private Supplier[] suppliers;
     private int supplierCount;
 
-    public Menu(Supplier[] suppliers, int supplierCount) {
+    public Menu(Supplier[] suppliers, int supplierCount, Scanner sc) {
         this.suppliers = suppliers;
         this.supplierCount = supplierCount;
+        this.sc = sc;
     }
 
     public void menu() {
