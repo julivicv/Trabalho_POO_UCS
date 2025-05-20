@@ -5,10 +5,11 @@ public class Menu {
     private static Admin adm = new Admin("a", "a");
     private User user;
     private Supplier[] suppliers;
-    private int supplierCount = 0;
+    private int supplierCount;
 
-    public Menu(Supplier[] suppliers) {
+    public Menu(Supplier[] suppliers, int supplierCount) {
         this.suppliers = suppliers;
+        this.supplierCount = supplierCount;
     }
 
     public void menu() {
