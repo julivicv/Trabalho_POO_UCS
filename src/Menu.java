@@ -43,6 +43,7 @@ public class Menu {
             System.out.println(" 1 - Gerenciar fornecedores");
             System.out.println(" 2 - Gerenciar produtos de fornecedor");
             System.out.println(" 3 - Gerenciar estoque de produtos");
+            System.out.println(" 4 - Criar dados de teste");  // New option
             System.out.println(" 0 - Sair");
 
             opc = sc.nextInt();
@@ -63,6 +64,9 @@ public class Menu {
                     while (!success) {
                         success = this.menuManageStock();
                     }
+                    break;
+                case 4:
+                    createTestData();
                     break;
                 case 0:
                     System.out.println("Saindo do sistema.");
@@ -341,6 +345,43 @@ public class Menu {
             return false;
         }
         return true;
+    }
+
+    private void createTestData() {
+        // Create test suppliers
+        if (supplierCount < suppliers.length) {
+            // Supplier 1
+            Supplier supplier1 = new Supplier("Tech Solutions", "tech@solutions.com", "pass123", "11999887766",
+                    new Adress("Rua Tech", "123", "Sala 1", "Centro", "01234-567", "São Paulo", "SP"));
+            suppliers[supplierCount++] = supplier1;
+
+            // Add products for supplier 1
+            Product laptop = new Product("Laptop Pro", "Laptop de alta performance", "laptop.jpg");
+            laptop.addStock(15, 5999.99);
+            supplier1.addProduct(laptop);
+
+            Product mouse = new Product("Mouse Gamer", "Mouse com 6 botões", "mouse.jpg");
+            mouse.addStock(30, 199.99);
+            supplier1.addProduct(mouse);
+
+            // Supplier 2
+            Supplier supplier2 = new Supplier("Office Supplies", "office@supplies.com", "pass456", "11988776655",
+                    new Adress("Rua Office", "456", "Loja 2", "Vila Nova", "04567-890", "São Paulo", "SP"));
+            suppliers[supplierCount++] = supplier2;
+
+            // Add products for supplier 2
+            Product paper = new Product("Papel A4", "Pacote com 500 folhas", "paper.jpg");
+            paper.addStock(100, 24.99);
+            supplier2.addProduct(paper);
+
+            Product pen = new Product("Caneta Azul", "Caixa com 50 unidades", "pen.jpg");
+            pen.addStock(50, 45.99);
+            supplier2.addProduct(pen);
+
+            System.out.println("Dados de teste criados com sucesso!");
+        } else {
+            System.out.println("Não há espaço para criar fornecedores de teste.");
+        }
     }
 
 }
