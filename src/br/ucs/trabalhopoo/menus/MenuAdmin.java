@@ -90,7 +90,6 @@ public class MenuAdmin extends Menu {
                     this.listSuppliersByName();
                     break;
                 case 0:
-                    super.adm.logout();
                     System.out.println("Voltando ao menu principal...");
                     return true;
                 default:
