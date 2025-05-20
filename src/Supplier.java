@@ -5,7 +5,7 @@ public class Supplier extends User {
     private String phone;
     private Adress adress;
     private static final String ROLE = "supplier";
-    private Product products[] = new Product[20];
+    private final Product[] products = new Product[20];
     private int currentProductIndex = 0;
 
     public Supplier(Scanner sc) {
@@ -82,7 +82,7 @@ public class Supplier extends User {
         String imgURL = sc.nextLine();
         sc.nextLine();
 
-        products[currentProductIndex] = new Product(name, description, imgURL, this);
+        products[currentProductIndex] = new Product(name, description, imgURL);
         currentProductIndex++;
 
         System.out.println("Produto cadastrado com sucesso!");
